@@ -1,1 +1,3 @@
 * @yavrsky
+*.md @skalenetwork/docowners
+/dictionaries/ @skalenetwork/docowners

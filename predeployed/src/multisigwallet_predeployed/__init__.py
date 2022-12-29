@@ -1,4 +1,4 @@
-'''Main module of multisig-wallet-predeployed
+'''Main module of multisigwallet-predeployed
 
 Classes:
   - MultiSigWalletGenerator
@@ -8,4 +8,4 @@ Values:
 '''
 
 from .address import MULTISIGWALLET_ADDRESS
-from .multisig_wallet_generator import MultiSigWalletGenerator
+from .multisigwallet_generator import MultiSigWalletGenerator

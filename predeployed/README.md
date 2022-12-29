@@ -15,7 +15,7 @@ pip install multisigwallet-predeployed
 ```python
 from multisigwallet_predeployed import  MultiSigWalletGenerator, MULTISIGWALLET_ADDRESS
 
-MULTISIG_OWNER_ADDRESS = '0xd200000000000000000000000000000000000000'
+ORIGINATOR_ADDRESS = '0xd200000000000000000000000000000000000000'
 
 multisigwallet_generator = MultiSigWalletGenerator()
 
@@ -24,7 +24,7 @@ genesis = {
     'alloc': {
         **multisigwallet_generator.generate_allocation(
             contract_address=MULTISIGWALLET_ADDRESS,
-            multisig_owner_address=MULTISIG_OWNER_ADDRESS,
+            originator_addresses=[ORIGINATOR_ADDRESS]
         )
     }
 }

@@ -1,0 +1,15 @@
+codecov
+ethersproject
+initializable
+mkdir
+mypy
+nomiclabs
+popen
+pylint
+pypi
+pytest
+pythonpath
+setuptools
+solhint
+typechain
+venv

@@ -4,7 +4,7 @@
 
 ### Solidity ###
 build/
-artifacts/
+/artifacts/
 cache/
 tmp.sol
 data/*.json

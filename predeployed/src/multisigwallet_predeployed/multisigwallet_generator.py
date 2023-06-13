@@ -57,15 +57,15 @@ class MultiSigWalletGenerator(ContractGenerator):
         required_confirmations = kwargs.get('required_confirmations', 1)
 
         if len(originator_addresses) > cls.MAX_OWNER_COUNT:
-            raise Exception('Number of originators must not be more than 50')
+            raise ValueError('Number of originators must not be more than 50')
         if required_confirmations > len(originator_addresses):
-            raise Exception('Number of required confirmations must be less'
+            raise ValueError('Number of required confirmations must be less'
                             'or equal than number of originators')
 
         storage: Dict[str, str] = {}
         for originator_address in originator_addresses:
             if originator_address == cls.ZERO_ADDRESS:
-                raise Exception('Originator address must not be zero')
+                raise ValueError('Originator address must not be zero')
             is_owner_value_slot = cls.calculate_mapping_value_slot(
                 cls.IS_OWNER_SLOT,
                 originator_address,

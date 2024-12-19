@@ -24,7 +24,7 @@ class TestMultiSigWalletGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             multisig = w3.eth.contract(address=MULTISIGWALLET_ADDRESS, abi=self.get_multisig_abi())
             assert multisig.functions.MAX_OWNER_COUNT().call() == self.MAX_OWNER_COUNT
@@ -33,7 +33,7 @@ class TestMultiSigWalletGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             multisig = w3.eth.contract(address=MULTISIGWALLET_ADDRESS, abi=self.get_multisig_abi())
             assert multisig.functions.isOwner(self.ORIGINATOR_ADDRESS_0).call()
@@ -42,7 +42,7 @@ class TestMultiSigWalletGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             multisig = w3.eth.contract(address=MULTISIGWALLET_ADDRESS, abi=self.get_multisig_abi())
             assert multisig.functions.owners(0).call() == self.ORIGINATOR_ADDRESS_0
@@ -51,11 +51,11 @@ class TestMultiSigWalletGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             multisig = w3.eth.contract(address=MULTISIGWALLET_ADDRESS, abi=self.get_multisig_abi())
             assert multisig.functions.required().call() == 1
-    
+
     def test_required_and_is_owners(self, tmpdir):
         multisigwallet_generator = MultiSigWalletGenerator()
 
@@ -65,7 +65,7 @@ class TestMultiSigWalletGenerator(TestSolidityProject):
             required_confirmations=2))
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             multisig = w3.eth.contract(address=MULTISIGWALLET_ADDRESS, abi=self.get_multisig_abi())
             assert multisig.functions.required().call() == 2
@@ -75,4 +75,3 @@ class TestMultiSigWalletGenerator(TestSolidityProject):
     def test_meta_info(self):
         meta = MultiSigWalletGenerator().get_meta()
         assert meta['name'] == 'MultiSigWallet'
-    

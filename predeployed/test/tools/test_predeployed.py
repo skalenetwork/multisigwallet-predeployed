@@ -1,9 +1,11 @@
 import json
 import subprocess
 import os
+import random
+import string
 
 
-class GethInstance:    
+class GethInstance:
     def __init__(self, geth):
         self.geth = geth
     def __enter__(self):
@@ -36,13 +38,32 @@ class TestPredeployed:
         assert process.returncode == 0
 
         # run geth
-        self.geth = subprocess.Popen(['geth', '--datadir', tmpdir, '--dev', '--http'], stderr=subprocess.PIPE, universal_newlines=True)
+        self.geth = subprocess.Popen(
+            [
+                'geth',
+                '--datadir', tmpdir,
+                '--dev',
+                '--http'
+            ],
+            stderr=subprocess.PIPE,
+            universal_newlines=True
+        )
 
+        output = []
         while True:
-            assert self.geth.poll() is None
-            output_line = self.geth.stderr.readline()
-            if 'HTTP server started' in output_line:
-                break
+            return_code = self.geth.poll()
+            if return_code is None:
+                output_line = self.geth.stderr.readline()
+                output.append(output_line)
+                if 'HTTP server started' in output_line:
+                    break
+            else:
+                # geth stopped
+                for line in output:
+                    print(line)
+                for line in self.geth.stderr.readlines():
+                    print(line)
+                raise RuntimeError("Geth was not started")
 
         return GethInstance(self.geth)
 
